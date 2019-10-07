@@ -102,5 +102,5 @@ sudo ./server
 
 same for the client
 
-The code for run on AWS Ec2 instance, as I have a windows laptop.
+The code was run on AWS Ec2 instance.
 */
