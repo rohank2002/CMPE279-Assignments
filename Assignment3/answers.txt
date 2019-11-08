@@ -1,0 +1,15 @@
+1.What happens if the file being requested is not inside the chroot? Does it matter?
+
+It does not matter if the file is not in the chroot directory, the file descriptor is passed to child from the parent.
+
+2.Explain the mechanism you are using to pass file descriptors between parent and child processes.
+
+File descriptor is created using fnctl.h in parent which is passed to child. The child process get it through argument.
+
+3.What happens if the file size of the disk file exceeds the size of the client’s hardcoded buffer? Does the client have sufficient checks to ensure no buffer overruns occur?
+
+It will only read the content of the file by as per its capacity, no error will be display.
+
+
+
+
