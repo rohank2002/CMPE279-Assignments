@@ -19,10 +19,29 @@ int main(int argc, char  *args[])
     int file_desc = atoi(args[2]);
 
     char* hello;
+	struct passwd *pwd = getpwnam("nobody");
+    uid_t UserId = pwd->pw_uid;
 
-    //chroot
-    chdir("/home/ubuntu/Assignment3/lockdown");
-    chroot("/home/ubuntu/Assignment3/lockdown");
+
+
+    // //chroot
+    // chdir("/home/ubuntu/Assignment3/lockdown");
+    // chroot("/home/ubuntu/Assignment3/lockdown");
+    chdir("/home/ubuntu/new/lockdown");
+    
+    if(chroot("/home/ubuntu/new/lockdown")==-1){
+        printf("Couldn't chroot\n");
+    }
+
+        if (setuid(UserId) < 0) {                      //setuid returns 0 on success and -1 on failure
+            printf("Failed to set ID \n");
+            exit(EXIT_FAILURE);
+        }
+        else {
+
+            printf("Process associated with id  %ld\n", (long)UserId);
+        }
+	
 
     read(file_desc,hello, 1024); 
     printf("%s\n",hello );

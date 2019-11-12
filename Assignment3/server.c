@@ -55,11 +55,11 @@ int main(int argc, char const *argv[])
         perror("listen"); 
         exit(EXIT_FAILURE); 
     } 
-    struct passwd *pwd = getpwnam("nobody");
-    uid_t UserId = pwd->pw_uid;
+
+    
 
     pid_t ProcessID = fork(), id;               
-    int flag = 0;    
+       
     /*
     When the fork() function is called, it returns the process id to the parent and 0 value to child, 
     and if it cannot spawn a new process a -1 value is returned.
@@ -67,16 +67,8 @@ int main(int argc, char const *argv[])
     When the fork function is called both the child and parent start executing parallely from the next instruction.
     */
     if(ProcessID==0) {                                        
-
-
-        if (setuid(UserId) < 0) {                      //setuid returns 0 on success and -1 on failure
-            printf("Failed to set ID \n");
-            exit(EXIT_FAILURE);
-        }
-        else {
-
-            printf("Process associated with id  %ld\n", (long)UserId);
-        }
+    
+    
 
         char server_fd_send[5]; // File descriptor to be shared
         char port_send[5]; // Port number to be shared
@@ -88,7 +80,7 @@ int main(int argc, char const *argv[])
 
 
         char *args[]={server_fd_send,port_send,input_file_desc_str, NULL}; // NULL terminated array of character pointers referenced from  https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
-        execv("./ServerExec",args);  // Exec function to create a fresh process
+        execvp("./ServerExec",args);  // Exec function to create a fresh process
         printf("Exec failed!\n");   // Just in case exec fails
     }
 
