@@ -96,7 +96,7 @@ gcc server.c -o server
 
 run as super user
 
-sudo ./server
+sudo ./server 8080 hello.txt
 
 This will execute the new process called serverexec.c 
 
