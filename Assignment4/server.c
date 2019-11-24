@@ -143,7 +143,7 @@ int main(int argc, char const *argv[])
 Instructions for executing the server code:
 
 compile using command 
-gcc server.c -o server
+gcc server.c -o server -lseccomp
 
 run as super user
 
